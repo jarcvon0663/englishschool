@@ -1,0 +1,181 @@
+.main {
+  min-height: calc(100vh - 70px);
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.emptyState {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+  color: #666;
+}
+
+.submissionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.submissionCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.studentInfo h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.email {
+  color: #667eea;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.fileSection {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.fileLink {
+  color: #667eea;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.fileLink:hover {
+  color: #5568d3;
+  text-decoration: underline;
+}
+
+.feedbackSection {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.feedbackSection h4 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.existingFeedback {
+  background: #e8f5e9;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.noFeedback {
+  color: #999;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feedbackTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.feedbackTextarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.saveButton {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  align-self: flex-start;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: #5568d3;
+}
+
+.saveButton:disabled {
+  background: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.success {
+  color: #28a745;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .submissionCard {
+    padding: 1.25rem;
+  }
+
+  .studentInfo h3 {
+    font-size: 1.1rem;
+  }
+
+  .saveButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .submissionCard {
+    padding: 1rem;
+  }
+}

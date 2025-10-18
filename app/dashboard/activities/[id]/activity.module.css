@@ -1,0 +1,210 @@
+.main {
+  min-height: calc(100vh - 70px);
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 1.5rem;
+}
+
+.teacher {
+  color: #667eea;
+  font-weight: 500;
+}
+
+.dueDate {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.description h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.description p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.attachment {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.attachment h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.downloadLink {
+  color: #667eea;
+  font-weight: 500;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.downloadLink:hover {
+  color: #5568d3;
+  text-decoration: underline;
+}
+
+.submissionSection {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.submissionSection h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.submittedInfo {
+  background: #e8f5e9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.submittedText {
+  color: #28a745;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.viewSubmission {
+  display: inline-block;
+  color: #667eea;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.viewSubmission:hover {
+  color: #5568d3;
+  text-decoration: underline;
+}
+
+.feedback {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.feedback h3 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.feedback p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.submissionForm {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.submissionForm h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.submitButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #218838;
+}
+
+.submitButton:disabled {
+  background: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}
