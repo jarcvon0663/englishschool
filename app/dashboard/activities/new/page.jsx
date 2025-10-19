@@ -18,6 +18,7 @@ export default function NewActivityPage() {
     description: "",
     fileUrl: "",
     dueDate: "",
+    course: "", // Nuevo campo
   });
 
   if (status === "loading") {
@@ -106,6 +107,22 @@ export default function NewActivityPage() {
                 rows={5}
                 className={styles.textarea}
                 placeholder="Describe la actividad en detalle..."
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="course" className={styles.label}>
+                Curso *
+              </label>
+              <input
+                type="text"
+                id="course"
+                name="course"
+                value={formData.course}
+                onChange={handleChange}
+                required
+                className={styles.input}
+                placeholder="Ej: 901, 9A, 802, 8B"
               />
             </div>
 

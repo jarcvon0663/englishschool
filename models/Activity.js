@@ -5,6 +5,7 @@ const ActivitySchema = new Schema({
   description: String,
   fileUrl: String,
   dueDate: Date,
+  course: { type: String, required: true }, // Nuevo campo
   teacherId: { type: Schema.Types.ObjectId, ref: "User" },
 }, { timestamps: true });
 

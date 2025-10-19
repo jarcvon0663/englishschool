@@ -6,6 +6,7 @@ import Activity from "@/models/Activity";
 import Submission from "@/models/Submission";
 import SubmissionForm from "./SubmissionForm";
 import styles from "./activity.module.css";
+import DeleteActivityButton from "@/components/DeleteActivityButton";
 
 export default async function ActivityDetailPage({ params }) {
   // Await params primero
@@ -55,6 +56,7 @@ export default async function ActivityDetailPage({ params }) {
         activityId: submission.activityId.toString(),
         fileUrl: submission.fileUrl,
         feedback: submission.feedback || null,
+        grade: submission.grade !== undefined ? submission.grade : null, // Asegúrate de que esté así
         createdAt: submission.createdAt.toISOString(),
         updatedAt: submission.updatedAt.toISOString(),
       };
@@ -68,11 +70,16 @@ export default async function ActivityDetailPage({ params }) {
         <div className={styles.container}>
           <div className={styles.card}>
             <h1 className={styles.title}>{activity.title}</h1>
-            
+
             <div className={styles.meta}>
               <p className={styles.teacher}>
                 Profesor: {activity.teacherId.name}
               </p>
+              {activity.course && (
+                <p className={styles.course}>
+                  📚 Curso: {activity.course}
+                </p>
+              )}
               {activity.dueDate && (
                 <p className={styles.dueDate}>
                   Fecha límite: {new Date(activity.dueDate).toLocaleDateString('es-ES')}
@@ -88,9 +95,9 @@ export default async function ActivityDetailPage({ params }) {
             {activity.fileUrl && (
               <div className={styles.attachment}>
                 <h3>Archivo adjunto:</h3>
-                <a 
-                  href={activity.fileUrl} 
-                  target="_blank" 
+                <a
+                  href={activity.fileUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className={styles.downloadLink}
                 >
@@ -107,9 +114,9 @@ export default async function ActivityDetailPage({ params }) {
                     <p className={styles.submittedText}>
                       ✓ Ya entregaste esta actividad
                     </p>
-                    <a 
-                      href={submission.fileUrl} 
-                      target="_blank" 
+                    <a
+                      href={submission.fileUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className={styles.viewSubmission}
                     >
@@ -121,7 +128,15 @@ export default async function ActivityDetailPage({ params }) {
                         <p>{submission.feedback}</p>
                       </div>
                     )}
-                    <SubmissionForm 
+
+                    {submission.grade && (
+                      <div className={styles.gradeDisplay}>
+                        <strong>Tu calificación:</strong> 
+                        <span className={styles.gradeNumber}>{submission.grade.toFixed(1)}</span>
+                        <span className={styles.gradeOutOf}>/ 5.0</span>
+                      </div>
+                    )}
+                    <SubmissionForm
                       activityId={activity._id}
                       existingSubmission={submission}
                     />
@@ -131,9 +146,17 @@ export default async function ActivityDetailPage({ params }) {
                 )}
               </div>
             )}
-          </div>
-        </div>
-      </main>
+            {session.user.role === "teacher" && (
+              <div className={styles.teacherActions}>
+                <DeleteActivityButton
+                  activityId={activity._id}
+                  activityTitle={activity.title}
+                />
+              </div>
+            )}
+          </div >
+        </div >
+      </main >
     </>
   );
 }

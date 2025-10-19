@@ -35,6 +35,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.role = dbUser.role;
         session.user.id = dbUser._id.toString();
         session.user.isAdmin = dbUser.isAdmin;
+        session.user.course = dbUser.course; // Agregar el curso
       }
       return session;
     },

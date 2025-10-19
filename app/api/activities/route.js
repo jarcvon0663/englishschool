@@ -46,10 +46,14 @@ export async function POST(req) {
     await connectDB();
 
     const body = await req.json();
-    const { title, description, fileUrl, dueDate } = body;
+    const { title, description, fileUrl, dueDate, course } = body; // Agregar course aquí
 
     if (!title || !description) {
       return NextResponse.json({ error: "Título y descripción son requeridos" }, { status: 400 });
+    }
+
+    if (!course) {
+      return NextResponse.json({ error: "El curso es requerido" }, { status: 400 });
     }
 
     const newActivity = await Activity.create({
@@ -57,6 +61,7 @@ export async function POST(req) {
       description,
       fileUrl,
       dueDate: dueDate ? new Date(dueDate) : null,
+      course, // Agregar course aquí
       teacherId: session.user.id,
     });
 

@@ -85,7 +85,7 @@ export async function POST(req) {
   }
 }
 
-// PUT - Actualizar feedback de una entrega (solo maestros)
+// PUT - Actualizar feedback y calificación de una entrega (solo maestros)
 export async function PUT(req) {
   try {
     const session = await auth();
@@ -97,15 +97,37 @@ export async function PUT(req) {
     await connectDB();
 
     const body = await req.json();
-    const { submissionId, feedback } = body;
+    const { submissionId, feedback, grade } = body;
+
+    console.log("Datos recibidos en API:", { submissionId, feedback, grade }); // Debug
 
     if (!submissionId) {
       return NextResponse.json({ error: "ID de entrega es requerido" }, { status: 400 });
     }
 
+    // Validar calificación si se proporciona
+    if (grade !== undefined && grade !== null && grade !== "") {
+      if (grade < 1 || grade > 5) {
+        return NextResponse.json({ error: "La calificación debe estar entre 1 y 5" }, { status: 400 });
+      }
+    }
+
+    // Preparar datos para actualizar
+    const updateData = {};
+    
+    if (feedback !== undefined) {
+      updateData.feedback = feedback;
+    }
+    
+    if (grade !== undefined && grade !== null && grade !== "") {
+      updateData.grade = parseFloat(grade);
+    }
+
+    console.log("Datos a actualizar:", updateData); // Debug
+
     const submission = await Submission.findByIdAndUpdate(
       submissionId,
-      { feedback },
+      updateData,
       { new: true }
     ).populate("studentId", "name email");
 
@@ -113,7 +135,26 @@ export async function PUT(req) {
       return NextResponse.json({ error: "Entrega no encontrada" }, { status: 404 });
     }
 
-    return NextResponse.json(submission);
+    console.log("Submission actualizado:", submission.toObject()); // Debug
+
+    // Convertir a objeto plano para asegurar que incluya grade
+    const submissionObject = {
+      _id: submission._id.toString(),
+      studentId: {
+        _id: submission.studentId._id.toString(),
+        name: submission.studentId.name,
+        email: submission.studentId.email,
+      },
+      activityId: submission.activityId.toString(),
+      fileUrl: submission.fileUrl,
+      feedback: submission.feedback,
+      grade: submission.grade, // Asegurarse de incluir grade
+      createdAt: submission.createdAt,
+      updatedAt: submission.updatedAt,
+      __v: submission.__v,
+    };
+
+    return NextResponse.json(submissionObject);
   } catch (error) {
     console.error("Error al actualizar entrega:", error);
     return NextResponse.json({ error: "Error al actualizar entrega" }, { status: 500 });

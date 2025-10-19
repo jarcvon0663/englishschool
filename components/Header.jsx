@@ -22,8 +22,19 @@ export default function Header() {
           </Link>
 
           {session.user.role === "teacher" && (
-            <Link href="/dashboard/activities/new" className={styles.navLink}>
-              Nueva Actividad
+            <>
+              <Link href="/dashboard/activities/new" className={styles.navLink}>
+                Nueva Actividad
+              </Link>
+              <Link href="/grades" className={styles.navLink}>
+                Calificaciones
+              </Link>
+            </>
+          )}
+
+          {session.user.role === "student" && session.user.course && (
+            <Link href="/select-course" className={styles.navLink}>
+              Cambiar Curso
             </Link>
           )}
 

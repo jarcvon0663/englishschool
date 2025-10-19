@@ -5,6 +5,7 @@ const SubmissionSchema = new Schema({
   activityId: { type: Schema.Types.ObjectId, ref: "Activity" },
   fileUrl: String,
   feedback: String,
+  grade: { type: Number, min: 1, max: 5, default: null }, // Nuevo campo
 }, { timestamps: true });
 
 export default models.Submission || model("Submission", SubmissionSchema);

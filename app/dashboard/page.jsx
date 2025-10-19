@@ -13,6 +13,11 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  // Redirigir a estudiantes sin curso asignado
+  if (session.user.role === "student" && !session.user.course) {
+    redirect("/select-course");
+  }
+
   await connectDB();
 
   let activities = [];
@@ -44,8 +49,8 @@ export default async function DashboardPage() {
     });
 
   } else {
-    // Estudiantes ven todas las actividades
-    activities = await Activity.find()
+    // Estudiantes ven solo las actividades de su curso
+    activities = await Activity.find({ course: session.user.course })
       .populate("teacherId", "name")
       .sort({ createdAt: -1 })
       .lean();
@@ -101,6 +106,13 @@ export default async function DashboardPage() {
                   )}
                   
                   <h3 className={styles.activityTitle}>{activity.title}</h3>
+
+                  {activity.course && (
+                    <p className={styles.courseBadge}>
+                      📚 Curso: {activity.course}
+                    </p>
+                  )}
+
                   <p className={styles.activityDescription}>{activity.description}</p>
                   
                   {session.user.role === "student" && (

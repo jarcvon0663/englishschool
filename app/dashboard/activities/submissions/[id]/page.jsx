@@ -50,6 +50,7 @@ export default async function SubmissionsPage({ params }) {
       email: sub.studentId.email,
     },
     activityId: sub.activityId.toString(),
+    grade: sub.grade !== undefined ? sub.grade : null, // Agregar esta línea si no está
   }));
 
   return (
@@ -95,10 +96,19 @@ export default async function SubmissionsPage({ params }) {
                     ) : (
                       <p className={styles.noFeedback}>Sin retroalimentación aún</p>
                     )}
+
+                    {submission.grade && (
+                      <div className={styles.gradeDisplay}>
+                        <strong>Calificación:</strong> 
+                        <span className={styles.gradeNumber}>{submission.grade.toFixed(1)}</span>
+                        <span className={styles.gradeOutOf}>/ 5.0</span>
+                      </div>
+                    )}
                     
                     <FeedbackForm 
                       submissionId={submission._id}
                       currentFeedback={submission.feedback || ""}
+                      currentGrade={submission.grade || null}
                     />
                   </div>
                 </div>

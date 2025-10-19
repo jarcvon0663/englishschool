@@ -6,6 +6,7 @@ const UserSchema = new Schema({
   image: String,
   role: { type: String, enum: ["teacher", "student"], default: "student" },
   isAdmin: { type: Boolean, default: false },
+  course: { type: String, default: null }, // Nuevo campo para estudiantes
 }, { timestamps: true });
 
 export default models.User || model("User", UserSchema);
