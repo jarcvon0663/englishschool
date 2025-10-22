@@ -3,8 +3,8 @@ import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
 
 export const metadata = {
-  title: "EscuelaCol - Plataforma Educativa",
-  description: "Plataforma educativa para escuelas rurales",
+  title: "I.E.A.C - Plataforma Educativa",
+  description: "Plataforma educativa para estudiantes de inglés",
 };
 
 export default async function RootLayout({ children }) {
